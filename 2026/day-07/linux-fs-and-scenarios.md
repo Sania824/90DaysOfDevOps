@@ -3,6 +3,7 @@
 Everything in Linux is either a file or a folder hence as a Linux user one must know the file structure of Linux to navigate and troubleshoot the system.
 
 **Understanding the components of a Command Prompt**
+
 root@ubuntu-dev:/#
 
 - root: The logged in user's username
@@ -51,3 +52,5 @@ root@ubuntu-dev:/#
 17. **etc**: Contains system configuration files. By using these files we can modify the system. Like Settings on a mobile/laptop.
    - shadow: I would use this file to see the encrypted passwords of the users.
    - passwd: I would use this file to check the user info.
+
+**Scenario Based Practice**
