@@ -54,3 +54,72 @@ root@ubuntu-dev:/#
    - passwd: I would use this file to check the user info.
 
 **Scenario Based Practice**
+
+**Scenario 1: Service Not Starting**
+
+A web application service called 'myapp' failed to start after a server reboot.
+What commands would you run to diagnose the issue?
+Write at least 4 commands in order.
+
+Step 1: systemctl status myapp
+Why: Firstly I'll check if the service is running or not.
+
+Step 2: systemctl is-enabled myapp
+Why: I'll check is the service is enabled or not (to be started on boot/reboot)
+
+Step 3: journalctl -u myapp -n 50 
+Why: I'll check what does the log says.
+
+Step 4: systemctl cat myapp
+Why: To inspect if the file exists or not.
+
+**Scenario 2: High CPU Usage**
+
+Your manager reports that the application server is slow.
+You SSH into the server. What commands would you run to identify
+which process is using high CPU?
+
+Step 1: top
+Why: To see real-time data on which process has the higest CPU usage.
+
+Step 2: ps aux --sort=%cpu | head -n 5
+Why: To get a detail view of the process, which is user is running it and what command is being executed.
+
+Step 3: sudo journalctl _PID=<PID> -n 20
+Why: Checking the logs to check whether there is an infinite loop, database lock, etc. 
+
+Step 4: kill -15 <PID>
+Why: Gracefully kill process otherwise use kill -9 <PID>
+
+**Scenario 3: Finding Service Logs**
+
+A developer asks: "Where are the logs for the 'docker' service?"
+The service is managed by systemd.
+What commands would you use?
+
+Step 1: systemctl status <service_name>
+Why: To check the service status
+
+Step 2: journalctl -u <service_name> -n 50
+Why: Check the last 50 log messages
+
+Step 3: journalctl -u <service_name> -f
+Why: Follow log messages in real-time
+
+**Scenario 4: File Permissions Issue**
+
+A script at /home/user/backup.sh is not executing.
+When you run it: ./backup.sh
+You get: "Permission denied"
+
+Step 1: cd /home/user
+Why: Change path to where the file is present
+
+Step 2:ls -l backup.sh
+Why: See all the files and folders and what permissions does each file has
+
+Step 3: chmod 764 backup.sh
+Why: To give execute permission to the logged in user keeping the group and other users permissions non-executable
+
+Step 4: ./backup.sh
+Why: Verify if the script ran successfully
